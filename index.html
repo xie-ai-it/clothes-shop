@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>简易服装店</title>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box;font-family:Arial}
+        header{background:#333;color:#fff;padding:16px;text-align:center;font-size:22px}
+        .container{max-width:1000px;margin:30px auto;padding:0 15px}
+        .goods-list{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+        .item{border:1px solid #eee;padding:15px;border-radius:8px;text-align:center}
+        .item h3{margin:10px 0;color:#222}
+        .price{color:#f44336;font-size:18px;margin:8px 0;font-weight:bold}
+        button{padding:8px 16px;background:#222;color:#fff;border:none;border-radius:4px;cursor:pointer}
+        button:hover{background:#444}
+        #cart{margin-top:40px;padding:20px;border:1px solid #ddd;border-radius:8px}
+    </style>
+</head>
+<body>
+<header>简约服装店</header>
+<div class="container">
+    <div class="goods-list">
+        <div class="item">
+            <h3>休闲T恤</h3>
+            <div class="price">¥59</div>
+            <button onclick="addCart('休闲T恤',59)">加入购物车</button>
+        </div>
+        <div class="item">
+            <h3>牛仔外套</h3>
+            <div class="price">¥199</div>
+            <button onclick="addCart('牛仔外套',199)">加入购物车</button>
+        </div>
+        <div class="item">
+            <h3>运动长裤</h3>
+            <div class="price">¥89</div>
+            <button onclick="addCart('运动长裤',89)">加入购物车</button>
+        </div>
+    </div>
+    <div id="cart">
+        <h3>购物车</h3>
+        <ul id="cart-ul"></ul>
+        <p>合计：<span id="total">0</span> 元</p>
+    </div>
+</div>
+
+<script>
+let cart = []
+function addCart(name,price){
+    cart.push({name,price})
+    renderCart()
+}
+function renderCart(){
+    let ul = document.getElementById('cart-ul')
+    let total = 0
+    ul.innerHTML = ''
+    cart.forEach(item=>{
+        let li = document.createElement('li')
+        li.innerText = item.name + " - ¥" + item.price
+        ul.appendChild(li)
+        total += item.price
+    })
+    document.getElementById('total').innerText = total
+}
+</script>
+</body>
+</html>
